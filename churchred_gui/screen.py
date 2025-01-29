@@ -88,6 +88,9 @@ class Window():
     # Queue a change in cursor back to an arrow
     self.cursor['new'] = 'arrow'
 
+    # The package of information about an object to be returned to main loop
+    self.elementPackage = {'triggered'  : False}
+
     # Loop through and draw all the elements on the screen ----------------------
     for element in self.screenElements:
       temp_package = element.run(self.screen, self.mouse)
@@ -96,7 +99,9 @@ class Window():
       if temp_package['changeCursor'] == True:
         self.cursor['new'] = temp_package['cursor']
 
-
+      # If an element is triggered
+      if temp_package['triggered'] == True:
+        self.elementPackage = temp_package
 
     # Change cursor based on given data. Change only occurs if new cursor is different from current one.
     if self.cursor['new'] != self.cursor['old']:
@@ -115,11 +120,11 @@ class Window():
     self.clock.tick(self.FPS) 
     pygame.display.update()
 
+
   # To add one or more elements to the screen
   def addElements(self, *args):
     for item in args:
       self.screenElements.append(item)
-  
 
 
   # The logic for screen resizing if enabled

@@ -23,7 +23,7 @@ class MouseClick():
     self.clickDownCheck(mouse)
 
     # Check if we release the button again WHILE the two previous checks are true
-    self.clickReleaseCheck(mouse)
+    self.clickReleaseCheck(elementSize, elementPosition, mouse)
     
   
   # Check if we are hovering the element or not
@@ -47,11 +47,13 @@ class MouseClick():
         self.clickDownTest = True
 
   # Check for button release if we are hovering and have clicked the button down
-  def clickReleaseCheck(self, mouse):
+  # Then reset and re-check hover, because we might still be hovering
+  def clickReleaseCheck(self, elementSize, elementPosition, mouse):
     if self.hoverTest == True and self.clickDownTest == True:
       if mouse[1][0] == False:
         self.isTriggered = True
         self.resetChecks()
+        self.hoverCheck(elementSize, elementPosition, mouse)
 
   # Resets all the checks
   def resetChecks(self):
