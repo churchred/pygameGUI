@@ -9,18 +9,20 @@ It is designed to make designing an app easier, so you can keep your focus on th
 
 ## Set-up
 
-To set everthing up you first need to import the library.
+  To set everthing up you first need to import the library.
 
-  # code block
-  print from churchred_gui import *
+    ```
+    print from churchred_gui import *
+    ```
 
   Then all you need to do is make the screen, and to create a basic loop for it.
   The logic for what happens when a module -like a button- is clicked should go inside the if-statement.
   The *package* variable will contain information about the triggered module.
 
-  # code block
-  print window = Screen()
-  print while True:
-  print    window.run()
-  print    if window.triggered == True:
-  print        print(window.package)
+    ```
+    print window = Screen()
+    print while True:
+    print    window.run()
+    print    if window.triggered == True:
+    print        print(window.package)
+    ```
