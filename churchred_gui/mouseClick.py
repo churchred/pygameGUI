@@ -59,7 +59,4 @@ class MouseClick():
   def resetChecks(self):
     self.hoverTest = False
     self.clickDownTest = False
-
-    
-  
   

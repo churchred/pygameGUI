@@ -91,17 +91,34 @@ class Window():
     # The package of information about an object to be returned to main loop
     self.elementPackage = {'triggered'  : False}
 
-    # Loop through and draw all the elements on the screen ----------------------
+    targetElement = None
+
+    # Loop through and do the logic for each element, when we notice a hover we break loop.
     for element in self.screenElements:
       temp_package = element.run(self.screen, self.mouse)
 
       # If we are hovering an element then queue a change in the cursor
       if temp_package['changeCursor'] == True:
         self.cursor['new'] = temp_package['cursor']
+        targetElement = element
 
       # If an element is triggered
       if temp_package['triggered'] == True:
         self.elementPackage = temp_package
+
+      # If we are hovering something after the check then we dont need to check any other element.
+      # This is to stop logic from running on the bottom element when two or more are overlapping.
+      if targetElement != None:
+        break
+
+    # Reset other non-hovered elements
+    for element in self.screenElements:
+      if element != targetElement:
+        element.mouseLogic.resetChecks()
+    
+    # Loop through the list of objects and draw them onto the screen
+    for element in reversed(self.screenElements):
+      element.draw(self.screen)
 
     # Change cursor based on given data. Change only occurs if new cursor is different from current one.
     if self.cursor['new'] != self.cursor['old']:
@@ -125,6 +142,9 @@ class Window():
   def addElements(self, *args):
     for item in args:
       self.screenElements.append(item)
+
+    # Sort by Z-index, where highest is placed at the top of list
+    self.screenElements.sort(key=lambda x: x.zIndex, reverse=True)
 
 
   # The logic for screen resizing if enabled

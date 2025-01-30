@@ -58,6 +58,8 @@ Most variables should NOT be changed post creation. Colors are usually fine howe
 * Button
 
 ## Window:
+The most important element we can make. It is this that creates the window and all the window logic.
+It is this element that contains all other modules.
 
 ### Variables
 
@@ -81,3 +83,44 @@ Most variables should NOT be changed post creation. Colors are usually fine howe
 
 ### Functions
 * **addElements():** Can take multiple arguments. When you have created a component, such as a button, you can add it to the window using this function.
+
+
+## Button
+A button. You can click it!
+All of the variables have default values, so you dont need to use any them if you just want a quick button.
+Don't change the variables after the object is created, unless you you do it through a button function, see section below.
+
+### Variables
+* **width:** Width of the button
+* **height:** Height of the button
+* **x:** Location of button on the x-axis
+* **y:** Location of button on the y-axis
+
+* **text:** The text you want to have on your button. The text is always centered within the button. If text is too long, there will be overflow.
+* **id:** Button id, to give a spesific button a spesific function, we need to add an id to it. Deault None.
+* **content:** You can add content to a button, any format, this is sent back to the main loop on a click. 
+* **zIndex:** If there is overlap between multiple elements, the higher z-index is prioritized. Default for all moduls is 0.
+
+* **borderWidth:** Width of the border around the button. Default is 0.
+* **borderRadius:** How rounded the corners of the button should be. Default is 0.
+* **clickSink:** How much  the buttons moves downwards when clicked down.
+
+* **backgroundColor:** Color of the button
+* **textColor:** Color of the button text
+* **borderColor:** Color of the button border, if you have one.
+
+* **hoverColor:** Color of the button when its being hovered
+* **clickColor:** Color of the button when its being clicked down
+* **textHoverColor:** Text color when button is being hovered. None by default.
+* **borderHoverColor:** Color of the border, if you have one, when you are hovering the button
+
+* **font:** Font of the button text. Arial by default.
+* **fontSize:** Font size of the button text. 20 by default.
+
+* **capitalize:** If you want to make each word of the text capitalized.
+* **toLowerCase:** If you want the text in all lowercase.
+* **toUpperCase:** If you want the text in all uppercase.
+* **underLine:** If you want a underline beneath the text.
+
+### Functions
+* **setText():** Used to change button text.     
