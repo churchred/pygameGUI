@@ -89,7 +89,12 @@ class Window():
     self.cursor['new'] = 'arrow'
 
     # The package of information about an object to be returned to main loop
-    self.elementPackage = {'triggered'  : False}
+    self.elementPackage = {
+      'triggered'  : False,
+      'id' : None,
+      'content' : None,
+      'type' : None
+      }
 
     targetElement = None
 
@@ -104,7 +109,10 @@ class Window():
 
       # If an element is triggered
       if temp_package['triggered'] == True:
-        self.elementPackage = temp_package
+        self.elementPackage['triggered'] = temp_package['triggered']
+        self.elementPackage['id'] = temp_package['id']
+        self.elementPackage['content'] = temp_package['content']
+        self.elementPackage['type'] = temp_package['type']
 
       # If we are hovering something after the check then we dont need to check any other element.
       # This is to stop logic from running on the bottom element when two or more are overlapping.
