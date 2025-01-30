@@ -45,7 +45,7 @@ The `elementPackage` dictionary contains details about triggered elements:
 
 ## Modules
 
-The library provides several GUI elements, each with customizable attributes and functions. Note that most properties should not be modified after creation, except for color-related attributes.
+The library provides several GUI elements, each with customizable attributes and functions. Note that most properties should not be modified after creation, except for most color-related attributes, but not text-colors as they'll need to be re-rendered.
 
 ### Available Modules
 
@@ -99,12 +99,12 @@ The **Button** module creates interactive buttons with various customization opt
 
 #### Styling
 
-- **borderWidth** *(int, default: 0)* - Border thickness.
+- **borderWidth** *(int, default: 1)* - Border thickness.
 - **borderRadius** *(int, default: 0)* - Corner roundness.
 - **clickSink** *(int, default: 1)* - Button depression depth on click.
-- **backgroundColor** *(RGB)* - Button color.
-- **textColor** *(RGB)* - Text color.
-- **borderColor** *(RGB)* - Border color.
+- **backgroundColor** *(RGB, default: blue)* - Button color.
+- **textColor** *(RGB, default: black)* - Text color.
+- **borderColor** *(RGB, default: black)* - Border color.
 - **hoverColor** *(RGB)* - Color when hovered.
 - **clickColor** *(RGB)* - Color when clicked.
 - **textHoverColor** *(RGB, default: None)* - Text color on hover.
