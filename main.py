@@ -12,20 +12,25 @@ from churchred_gui import *
 
 window = Window(resizable=True, backgrounColor=colorIndex["orangeDark"])
 
-label1 = Label(text="Fantastic Beast and Where to Find Them", fontSize=30)
+label1 = Label(text="Fantastic Beast and Where to Find Them", fontSize=30, zIndex=10)
 label2 = Label(text="There are many cool magical beasts in Harry Potter", fontSize=20, cursor="hand", clickable=True)
 
 btn = Button(y=100, id="green")
 btn2 = Button(y=100, id="blue")
 btn3 = Button(y=120, backgroundColor=colorIndex["purple"], underline=True)
 
-fb = FlexBox(centerDirection=1, height=400, zIndex=3, x=20)
-fb.addElements(btn2, btn3)
+fb = FlexBox(centerDirection=1, height=400, zIndex=3, x=20, backgroundColor=colorIndex["black"])
 
-fb2 = FlexBox(backgroundColor=colorIndex["green"], y=90, zIndex=3)
+fb2 = FlexBox( y=90, zIndex=3, centerDirection=1)
 fb2.addElements(btn)
 
-window.addElements(fb, fb2)
+fb3 = FlexBox(backgroundColor=colorIndex["red"], width = 300, centerDirection=0)
+fb3.addElements(btn3)
+
+
+fb.addElements(fb2, fb3)
+
+window.addElements(label1, fb)
 
 while True:
 

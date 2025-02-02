@@ -5,7 +5,7 @@ class FlexBox(CenterItems):
   def __init__(self, 
       
           x=0, y=0, width=100, height=100,
-          backgroundColor=None, borderColor=None, borderRadius=0, borderWidth=1,
+          backgroundColor=None, borderColor=(0,0,0), borderRadius=0, borderWidth=1,
           centerDirection=0, zIndex=0):
 
     self.x = x
@@ -18,8 +18,10 @@ class FlexBox(CenterItems):
 
     self.zIndex = zIndex
     self.type = "FlexBox"
+    self.borderColor = borderColor
 
     self.backgroundColor = backgroundColor
+    self.cursor = "arrow"
 
     self.screenElements = []
     self.centerDirection = centerDirection
@@ -28,7 +30,7 @@ class FlexBox(CenterItems):
   def run(self, screen, mouse):
 
     # The package with information that is to be returned to the main loop if needed
-    returnPackage = {"changeCursor":False, "cursor":None, "triggered":False, "content":None, "id":None, "type":"FlexBox"}
+    returnPackage = {"changeCursor":False, "cursor":self.cursor, "triggered":False, "content":None, "id":None, "type":"FlexBox"}
 
     targetElement = None
 
@@ -40,8 +42,8 @@ class FlexBox(CenterItems):
       if temp_package['changeCursor'] == True:
         targetElement = element
         returnPackage["changeCursor"] = True
-        returnPackage["cursor"] = element.cursor
-
+        returnPackage["cursor"] = temp_package["cursor"]
+        
       # If an element is triggered
       if temp_package['triggered'] == True:
         returnPackage['triggered'] = temp_package['triggered']
@@ -56,7 +58,7 @@ class FlexBox(CenterItems):
 
     # Reset other non-hovered elements
     for element in self.screenElements:
-      if element != targetElement:
+      if element != targetElement and element.type != "FlexBox":
         element.mouseLogic.resetChecks()
     
 
@@ -66,7 +68,9 @@ class FlexBox(CenterItems):
 
 
   def draw(self, screen):
-    self.drawRect(screen, (0,0,0), (0,0,0))
+
+    if self.backgroundColor != None:
+      self.drawRect(screen, self.backgroundColor, self.borderColor)
 
     # Loop through the list of objects and draw them onto the screen
     for element in reversed(self.screenElements):

@@ -93,13 +93,8 @@ class Window(CenterItems):
     self.cursor['new'] = 'arrow'
 
     # The package of information about an object to be returned to main loop
-    self.elementPackage = {
-      'triggered'  : False,
-      'id' : None,
-      'content' : None,
-      'type' : None
-      }
-
+    self.elementPackage = {'triggered'  : False, 'id' : None, 'content' : None, 'type' : None}
+    
     targetElement = None
 
     # Loop through and do the logic for each element, when we notice a hover we break loop.
