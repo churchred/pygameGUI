@@ -47,6 +47,8 @@ The `elementPackage` dictionary contains details about triggered elements:
 
 The library provides several GUI elements, each with customizable attributes and functions. Most properties should not be modified after creation, except for color-related attributes. However, text colors need to be re-rendered.
 
+It's not made to be used in games, but instead to be used for simple app development in pygame.
+
 ### Available Modules
 
 - **Window** (Core container for all elements)

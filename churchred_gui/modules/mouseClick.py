@@ -3,13 +3,16 @@
 
 
 class MouseClick():
-  def __init__(self):
+  def __init__(self, clickable):
 
 
     self.hoverTest = False     # Check if we are hovering
     self.clickDownTest = False # If mouse button is clicked down while we are hovering
     self.inititalClick = False # If the initially clicked the mouse button down while within the element
     self.allowClick = False    # See if we are allowed to initially click element (i.e mouse not clicked while hovering element)
+
+    # Can we click it?
+    self.clickable = clickable
 
     # If element is clicked this becomes true for a single frame
     self.isTriggered = False
@@ -19,6 +22,11 @@ class MouseClick():
 
     # Reset the triggered varible so it only runs once
     self.isTriggered = False
+
+    if not self.clickable:
+      # Check if cursor is hovering element
+      self.hoverCheck(elementSize, elementPosition, mouse)
+      return
 
     # Check if we release the mouse button while within the element
     self.clickReleaseCheck(elementSize, elementPosition, mouse)

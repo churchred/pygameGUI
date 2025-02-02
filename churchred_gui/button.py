@@ -2,10 +2,10 @@
 
 
 import pygame
-from .mouseClick import MouseClick
-from .textLine import lineText
-from .UIElement import UIElement
-from .general import lightenColor, darkenColor
+from .modules.mouseClick import MouseClick
+from .modules.textLine import lineText
+from .modules.UIElement import UIElement
+from .modules.general import lightenColor, darkenColor
 
 class Button(UIElement):
   def __init__(self, 
@@ -13,7 +13,7 @@ class Button(UIElement):
             # UI-element variables:
             x=0, y=0, width=100, height=30,
             id=None, type="Button", zIndex=0,
-            content=None, cursor="hand",
+            content=None, clickable=True,
 
             # Text elements
             text = "Button", font="Arial", fontSize = 18,
@@ -25,7 +25,7 @@ class Button(UIElement):
             borderWidth=1, borderColor=(0,0,0), borderHoverColor=None, borderRadius=0):
     
     # Sets the basic UI-element variables from UIElement-class
-    super().__init__(x=x, y=y, width=width, height=height, cursor=cursor,
+    super().__init__(x=x, y=y, width=width, height=height, clickable=clickable, cursor="hand",
                      type=type, id=id, zIndex=zIndex, content=content)
 
     # Border variables
@@ -47,32 +47,10 @@ class Button(UIElement):
     self.maxSink = 1
     self.currentSink = 0
 
-    # Mouse click/hover logic
-    self.mouseLogic = MouseClick()
-
     # Make button text
     self.text = lineText(text=text, font=font, fontSize=fontSize, textColor=textColor,
                          underline=underline, toUpperCase=toUpperCase, toLowerCase=toLowerCase,
                          capitalize=capitalize, width=self.width, height=self.height)
-
-
-  def run(self, screen, mouse):
-
-    # The package with information that is to be returned to the main loop if needed
-    returnPackage = {"changeCursor":False, "cursor":self.cursor, "triggered":False, "content":self.content, "id":self.id, "type":self.type}
-
-    # Check for hover and click
-    self.mouseLogic.run((self.x, self.y), (self.width, self.height), mouse)
-
-    # If hovering queue a change in cursor
-    if self.mouseLogic.hoverTest == True:
-      returnPackage["changeCursor"] = True
-
-    # If triggered queue a trigger to be sent up to main loop
-    if self.mouseLogic.isTriggered == True:
-      returnPackage["triggered"] = True
-
-    return returnPackage
 
 
   def draw(self, screen):
@@ -86,7 +64,7 @@ class Button(UIElement):
     # Draw the button base on wether its being clicked, hovered, or just default.
     if self.mouseLogic.clickDownTest == True:
       self.drawButton(screen, self.clickColor, self.borderHoverColor)
-    elif self.mouseLogic.hoverTest == True:
+    elif self.mouseLogic.hoverTest == True and self.clickable == True:
       self.drawButton(screen, self.hoverColor, self.borderHoverColor)
     else:
       self.drawButton(screen, self.backgroundColor, self.borderColor)

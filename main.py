@@ -10,15 +10,22 @@ from churchred_gui import *
 # Add general Modul class and Click class, and HOLD class
 
 
-window = Window(resizable=True, backgrounColor=colorIndex["greenDark"], centerDirection="vert")
+window = Window(resizable=True, backgrounColor=colorIndex["orangeDark"])
 
-btn = Button(x=10, y=300, zIndex=2, backgroundColor=colorIndex['red'], id='red')
+label1 = Label(text="Fantastic Beast and Where to Find Them", fontSize=30)
+label2 = Label(text="There are many cool magical beasts in Harry Potter", fontSize=20, cursor="hand", clickable=True)
 
-btn2 = Button(y=100, id="blue", width=300, height=50, fontSize=30, toUpperCase=True)
+btn = Button(y=100, id="green")
+btn2 = Button(y=100, id="blue")
 btn3 = Button(y=120, backgroundColor=colorIndex["purple"], underline=True)
 
+fb = FlexBox(centerDirection=1, height=400, zIndex=3, x=20)
+fb.addElements(btn2, btn3)
 
-window.addElements(btn, btn2, btn3)
+fb2 = FlexBox(backgroundColor=colorIndex["green"], y=90, zIndex=3)
+fb2.addElements(btn)
+
+window.addElements(fb, fb2)
 
 while True:
 
@@ -29,9 +36,6 @@ while True:
     # Prints information about triggered elemenet
     print(window.elementPackage)
 
-    # If button is clicked set new text to it
-    if window.elementPackage["id"] == "red":
-      btn.setText("Yoo")
 
 
 

@@ -1,3 +1,5 @@
 from .screen import Window
 from .button import Button
-from churchred_gui.settings import colorIndex
+from .label import Label
+from. flexBox import FlexBox
+from churchred_gui.modules.settings import colorIndex

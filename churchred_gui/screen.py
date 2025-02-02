@@ -1,8 +1,8 @@
 
 # Import pygame reletated things
 import pygame, sys
-from churchred_gui.settings import mouseCursor
-from .centerItems import CenterItems
+from churchred_gui.modules.settings import mouseCursor
+from .modules.centerItems import CenterItems
 
 
 class Window(CenterItems):
@@ -125,7 +125,7 @@ class Window(CenterItems):
 
     # Reset other non-hovered elements
     for element in self.screenElements:
-      if element != targetElement:
+      if element != targetElement and element.type != "FlexBox":
         element.mouseLogic.resetChecks()
     
     # Loop through the list of objects and draw them onto the screen
@@ -161,6 +161,8 @@ class Window(CenterItems):
     # Center items if needed
     self.center()
 
+    self.appPrint(f"Added {len(args)} new elements to window!")
+
 
   # The logic for screen resizing if enabled
   def resize_logic(self, event):
@@ -191,14 +193,16 @@ class Window(CenterItems):
     self.center()
 
     # Print new info about screen if able
-    if self.appMessages == True:
-      print(f"Resized window to: {self.width}x{self.height}")
+    self.appPrint(f"Resized window to: {self.width}x{self.height}")
 
 
   # When centering content, this should happen
   def center(self):
 
     # elements, container_width, container_height, direction
-    self.centerElements(self.screenElements, self.width, self.height, self.centerDirection)
+    self.centerElements(self.screenElements, 0, 0, self.width, self.height, self.centerDirection)
 
-  
+
+  def appPrint(self, message):
+    if self.appMessages:
+      print(message)
