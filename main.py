@@ -10,24 +10,28 @@ from churchred_gui import *
 # Add general Modul class and Click class, and HOLD class
 
 
-window = Window(resizable=True, backgrounColor=colorIndex["greenDark"])
-btn = Button(x=10, y=100, zIndex=2, backgroundColor=colorIndex['red'], id='red')
-btn2 = Button(y=100, id="blue")
-btn3 = Button(y=120, text="This is a really really long sentence")
-btn4 = Button(y=400)
-btn5 = Button(y=100, x=200, textHoverColor=colorIndex['white'], hoverColor=colorIndex['black'])
-btn6 = Button(y=200, x=200)
-btn7 = Button(y=300, x=200, underLine=True, backgroundColor=colorIndex["orange"])
-btn8 = Button(y=400, x=200, borderRadius=10)
+window = Window(resizable=True, backgrounColor=colorIndex["greenDark"], centerDirection="vert")
 
-window.addElements(btn, btn2, btn3, btn4, btn5, btn6, btn7, btn8)
+btn = Button(x=10, y=300, zIndex=2, backgroundColor=colorIndex['red'], id='red')
+
+btn2 = Button(y=100, id="blue", width=300, height=50, fontSize=30, toUpperCase=True)
+btn3 = Button(y=120, backgroundColor=colorIndex["purple"], underline=True)
+
+
+window.addElements(btn, btn2, btn3)
 
 while True:
 
+  # Runs the pygame loop, and checks if somehting is triggered
   window.run()
-
   if window.elementPackage['triggered'] == True:
+
+    # Prints information about triggered elemenet
     print(window.elementPackage)
+
+    # If button is clicked set new text to it
+    if window.elementPackage["id"] == "red":
+      btn.setText("Yoo")
 
 
 

@@ -1,11 +1,15 @@
 
 
+
+
 class MouseClick():
   def __init__(self):
 
-    # The two tests for checking for a click
-    self.hoverTest = False
-    self.clickDownTest = False
+
+    self.hoverTest = False     # Check if we are hovering
+    self.clickDownTest = False # If mouse button is clicked down while we are hovering
+    self.inititalClick = False # If the initially clicked the mouse button down while within the element
+    self.allowClick = False    # See if we are allowed to initially click element (i.e mouse not clicked while hovering element)
 
     # If element is clicked this becomes true for a single frame
     self.isTriggered = False
@@ -16,44 +20,52 @@ class MouseClick():
     # Reset the triggered varible so it only runs once
     self.isTriggered = False
 
+    # Check if we release the mouse button while within the element
+    self.clickReleaseCheck(elementSize, elementPosition, mouse)
+
     # Check if cursor is hovering element
     self.hoverCheck(elementSize, elementPosition, mouse)
 
-    # Check if we click down the mouse button while within the element
     self.clickDownCheck(mouse)
 
-    # Check if we release the button again WHILE the two previous checks are true
-    self.clickReleaseCheck(elementSize, elementPosition, mouse)
-    
+    if self.hoverTest and not mouse[1][0]:
+      self.allowClick = True
+    elif not self.hoverTest:
+      self.allowClick = False
+
+    if self.allowClick and mouse[1][0]:
+      self.inititalClick = True
+    if not mouse[1][0]:
+      self.inititalClick = False
+
+
+  def clickDownCheck(self, mouse):
+    if self.hoverTest and mouse[1][0] and self.inititalClick:
+      self.clickDownTest = True
+    else:
+      self.clickDownTest = False
   
   # Check if we are hovering the element or not
   def hoverCheck(self, elementPosition, elementSize, mouse):
 
+    # Unpacks given variables for more readability
     x, y = elementPosition
     width, height = elementSize
+    mouse_x, mouse_y = mouse[0]
 
-    # See if mouse is within the element and NOT already clicked down when it is.
-    if mouse[0][0] > x and mouse[0][0] < x + width and mouse[0][1] > y and mouse[0][1] < y + height:
-      if mouse[1][0] == False:
-        self.hoverTest = True
-    else:
-      self.resetChecks()
+    # Check if mouse if within bounds of the element
+    self.hoverTest = (x < mouse_x < x + width) and (y < mouse_y < y + height)
 
-
-  # See if we click the mouse button down while the hover test is true  
-  def clickDownCheck(self, mouse):
-    if self.hoverTest == True:
-      if mouse[1][0] == True:
-        self.clickDownTest = True
 
   # Check for button release if we are hovering and have clicked the button down
   # Then reset and re-check hover, because we might still be hovering
   def clickReleaseCheck(self, elementSize, elementPosition, mouse):
-    if self.hoverTest == True and self.clickDownTest == True:
-      if mouse[1][0] == False:
+    if self.hoverTest and self.inititalClick:
+      if not mouse[1][0]:
         self.isTriggered = True
         self.resetChecks()
         self.hoverCheck(elementSize, elementPosition, mouse)
+
 
   # Resets all the checks
   def resetChecks(self):

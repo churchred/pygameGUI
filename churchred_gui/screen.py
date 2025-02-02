@@ -1,16 +1,18 @@
 
 # Import pygame reletated things
 import pygame, sys
-from churchred_gui.setings import mouseCursor
+from churchred_gui.settings import mouseCursor
+from .centerItems import CenterItems
 
-class Window():
+
+class Window(CenterItems):
   def __init__(self,
                width=500, height=500, FPS=60, 
                minWidth = None, minHeight = None,
                maxWidth = None, maxHeight = None,
                backgrounColor = (255,255,255),
                title="Application", showFPS=True, resizable = False,
-               appMessages = True
+               appMessages = True, centerDirection=None
                ):
 
 
@@ -21,6 +23,9 @@ class Window():
     # For testing
     self.showFPS = showFPS         # Shows the current FPS in the banner
     self.appMessages = appMessages # Allows print-messages from the GUI
+
+    # Vartiables about centering and centering direction
+    self.centerDirection = centerDirection
 
     # Screen size
     self.title = title
@@ -55,7 +60,6 @@ class Window():
 
     # If something is activated or "triggered" on the screen
     self.isTriggered = False
-
 
   # Runs the app
   def run(self):
@@ -154,6 +158,9 @@ class Window():
     # Sort by Z-index, where highest is placed at the top of list
     self.screenElements.sort(key=lambda x: x.zIndex, reverse=True)
 
+    # Center items if needed
+    self.center()
+
 
   # The logic for screen resizing if enabled
   def resize_logic(self, event):
@@ -180,9 +187,18 @@ class Window():
     # Resize the window
     self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
 
+    # Center items if needed
+    self.center()
+
     # Print new info about screen if able
     if self.appMessages == True:
       print(f"Resized window to: {self.width}x{self.height}")
 
+
+  # When centering content, this should happen
+  def center(self):
+
+    # elements, container_width, container_height, direction
+    self.centerElements(self.screenElements, self.width, self.height, self.centerDirection)
 
   

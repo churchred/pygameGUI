@@ -6,9 +6,7 @@ Churchred's GUI library is a simple and efficient tool designed to streamline GU
 
 ---
 
-## Setup
-
-### Installation
+## Installation
 
 First, import the library into your Pygame project:
 
@@ -16,7 +14,9 @@ First, import the library into your Pygame project:
 from churchred_gui import *
 ```
 
-### Creating a Window
+---
+
+## Creating a Window
 
 To initialize a basic GUI, create a window instance and run the main loop:
 
@@ -45,12 +45,12 @@ The `elementPackage` dictionary contains details about triggered elements:
 
 ## Modules
 
-The library provides several GUI elements, each with customizable attributes and functions. Note that most properties should not be modified after creation, except for most color-related attributes, but not text-colors as they'll need to be re-rendered.
+The library provides several GUI elements, each with customizable attributes and functions. Most properties should not be modified after creation, except for color-related attributes. However, text colors need to be re-rendered.
 
 ### Available Modules
 
-- **Window** (core container for all elements)
-- **Button** (clickable UI component)
+- **Window** (Core container for all elements)
+- **Button** (Clickable UI component)
 
 ---
 
@@ -66,11 +66,15 @@ The **Window** module is the primary element that manages the GUI environment.
 - **title** *(str)* - Window title text.
 - **FPS** *(int, default: 60)* - Frame rate cap.
 - **showFPS** *(bool)* - Displays FPS in the title bar if `True`.
+- **centerDirection** *(0/1, "horizontal"/"hor", "vertical"/"vert", default: None)* - Determines how elements inside the window are arranged.
+  - `0`, `"hor"`, `"horizontal"`: Arrange elements in a **horizontal** row.
+  - `1`, `"vert"`, `"vertical"`: Arrange elements in a **vertical** column.
+  - `None`: Elements control their own placement using their `x/y` values.
 - **appMessages** *(bool)* - Enables/disables event messages (e.g., resize notifications).
 - **resizable** *(bool)* - Allows window resizing if `True`.
 - **minWidth/minHeight** *(int)* - Minimum window size when resizing.
 - **maxWidth/maxHeight** *(int)* - Maximum window size when resizing.
-  > Note: The min/max size only applies when resizing. If the initial size exceeds the limit, it remains unchanged until resized manually.
+  - *Note:* Min/max size only applies when resizing. If the initial size exceeds the limit, it remains unchanged until resized manually.
 
 ### Methods
 
@@ -117,16 +121,18 @@ The **Button** module creates interactive buttons with various customization opt
 - **capitalize** *(bool)* - Capitalizes each word if `True`.
 - **toLowerCase** *(bool)* - Converts text to lowercase.
 - **toUpperCase** *(bool)* - Converts text to uppercase.
-- **underLine** *(bool)* - Underlines text if `True`.
+- **underline** *(bool)* - Underlines text if `True`.
 
 ### Methods
 
-- **setText(new_text)** - Updates button text dynamically.
+- **setText(new_text)** - Updates button text dynamically and re-renders it with transformations.
 
 #### Example:
 ```python
+button1 = Button(text="Old Text")
 button1.setText("New Text")
 ```
+This updates the button text dynamically without requiring a full reinitialization.
 
 ---
 
