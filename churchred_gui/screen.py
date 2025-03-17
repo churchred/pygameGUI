@@ -118,13 +118,11 @@ class Window(CenterItems):
       if targetElement != None:
         break
 
+    # Loop through the list of objects and draw them onto the screen
     # Reset other non-hovered elements
-    for element in self.screenElements:
+    for element in reversed(self.screenElements):
       if element != targetElement and element.type != "FlexBox":
         element.mouseLogic.resetChecks()
-    
-    # Loop through the list of objects and draw them onto the screen
-    for element in reversed(self.screenElements):
       element.draw(self.screen)
 
     # Change cursor based on given data. Change only occurs if new cursor is different from current one.

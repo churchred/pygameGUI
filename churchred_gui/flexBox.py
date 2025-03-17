@@ -61,20 +61,19 @@ class FlexBox(CenterItems):
       if element != targetElement and element.type != "FlexBox":
         element.mouseLogic.resetChecks()
     
-
-
-
     return returnPackage
 
 
   def draw(self, screen):
-
+    
+    # Draw a rect with the background color if applicable
     if self.backgroundColor != None:
       self.drawRect(screen, self.backgroundColor, self.borderColor)
 
     # Loop through the list of objects and draw them onto the screen
     for element in reversed(self.screenElements):
       element.draw(screen)
+
 
   def addElements(self, *args):
     for item in args:

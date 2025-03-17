@@ -47,7 +47,10 @@ class Label(UIElement):
 
   def draw(self, screen):
 
+    # Draw the label background if one is present
     self.drawRect(screen, self.backgroundColor, self.borderColor)
+
+    # Draw the text
     self.text.run(screen, (self.x, self.y))
 
 
@@ -60,7 +63,7 @@ class Label(UIElement):
     pygame.draw.rect(screen, bord_col, 
     (self.x, self.y, self.width, self.height), border_radius=self.borderRadius)
 
-    # Draw the button
+    # Draw the background
     pygame.draw.rect(screen, color, 
     (self.x+self.borderWidth, self.y+self.borderWidth, 
 		self.width-self.borderWidth*2, self.height-self.borderWidth*2), border_radius=self.borderRadius)
