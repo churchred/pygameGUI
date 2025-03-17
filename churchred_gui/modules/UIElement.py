@@ -37,21 +37,25 @@ class UIElement:
     def run(self, screen, mouse):
         
         # The package with information that is to be returned to the main loop if needed
-        returnPackage = {"changeCursor":False, "cursor":self.cursor, "triggered":False, "content":self.content, "id":self.id, "type":self.type}
+        self.returnPackage = {"changeCursor":False, "cursor":self.cursor, "triggered":False, "content":self.content, "id":self.id, "type":self.type}
 
         # Check for hover and click
         self.mouseLogic.run((self.x, self.y), (self.width, self.height), mouse)
 
         # If hovering queue a change in cursor
         if self.mouseLogic.hoverTest == True:
-            returnPackage["changeCursor"] = True
+            self.returnPackage["changeCursor"] = True
 
         # If triggered queue a trigger to be sent up to main loop
         if self.mouseLogic.isTriggered == True:
-            returnPackage["triggered"] = True
+            self.returnPackage["triggered"] = True
 
-        return returnPackage
+        self.extraRunCode()
+
+        return self.returnPackage
     
+    def extraRunCode(self):
+        pass
 
     def center(self):
         pass

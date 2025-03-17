@@ -51,6 +51,7 @@ class Window(CenterItems):
 
     # Makes the game tick
     self.clock = pygame.time.Clock()
+    self.dt = 1
 
     # Makes the cursor variable
     self.cursor = {'old' : None, 'new' : 'arrow'}
@@ -123,7 +124,7 @@ class Window(CenterItems):
     for element in reversed(self.screenElements):
       if element != targetElement and element.type != "FlexBox":
         element.mouseLogic.resetChecks()
-      element.draw(self.screen)
+      element.draw(self.screen, self.dt)
 
     # Change cursor based on given data. Change only occurs if new cursor is different from current one.
     if self.cursor['new'] != self.cursor['old']:
@@ -139,7 +140,8 @@ class Window(CenterItems):
       pygame.display.set_caption(self.title)
 
     # Update screen and clock
-    self.clock.tick(self.FPS) 
+    self.dt = self.clock.tick(self.FPS) / 1000
+    # self.clock.tick(self.FPS) 
     pygame.display.update()
 
 

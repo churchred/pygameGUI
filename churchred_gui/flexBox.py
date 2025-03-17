@@ -64,7 +64,7 @@ class FlexBox(CenterItems):
     return returnPackage
 
 
-  def draw(self, screen):
+  def draw(self, screen, dt):
     
     # Draw a rect with the background color if applicable
     if self.backgroundColor != None:
@@ -72,7 +72,7 @@ class FlexBox(CenterItems):
 
     # Loop through the list of objects and draw them onto the screen
     for element in reversed(self.screenElements):
-      element.draw(screen)
+      element.draw(screen, dt)
 
 
   def addElements(self, *args):

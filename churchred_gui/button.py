@@ -53,7 +53,7 @@ class Button(UIElement):
                          capitalize=capitalize, width=self.width, height=self.height)
 
 
-  def draw(self, screen):
+  def draw(self, screen, dt):
 
     # Adds a sinking effect to the button when clicked down
     if self.mouseLogic.clickDownTest == True:

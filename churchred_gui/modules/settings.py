@@ -5,8 +5,8 @@ colorIndex = {
     "black": (0, 0, 0),
 
     "red": (200, 22, 22),
-    "redLight": (147, 16, 16),
-    "redDark": (229, 102, 102),
+    "redLight": (229, 102, 102),
+    "redDark": (147, 16, 16),
 
     "blue": (32, 79, 208),
     "blueLight": (86, 127, 239),

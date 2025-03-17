@@ -45,7 +45,7 @@ class Label(UIElement):
 
 
 
-  def draw(self, screen):
+  def draw(self, screen, dt):
 
     # Draw the label background if one is present
     self.drawRect(screen, self.backgroundColor, self.borderColor)
